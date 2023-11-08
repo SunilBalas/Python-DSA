@@ -28,6 +28,7 @@ class DoublyLinkedList:
             if temp.item == data:
                 return temp
             temp = temp.next
+        return None
         
     def insert_at_start(self, data) -> None:
         '''
@@ -70,10 +71,69 @@ class DoublyLinkedList:
             - Assign the reference of new node to next reference of given node
         '''
         
-        if not self.is_empty():
+        if node is not None:
             new_node = Node(data, node, node.next)
-            node.next.prev = new_node
-            node.next = new_node
+            if node.next is not None:
+                node.next.prev = new_node
+                node.next = new_node
+                
+    def delete_from_start(self) -> None:
+        '''
+            - Assign the reference of second node to head pointer
+            - If list is not empty then assign the None to previous reference of
+                second node because it is a first node now.
+        '''
+        
+        if not self.is_empty():
+            self.head = self.head.next
+            if self.head is not None:
+                self.head.prev = None
+    
+    def delete_from_last(self) -> None:
+        if self.head is None:   # Empty list
+            return None
+        elif self.head.next is None:    # Only one node
+            self.head = None
+        else:
+            temp = self.head
+            while temp.next is not None:
+                temp = temp.next
+            temp.prev.next = None
+            
+    def delete_node(self, data):
+        if self.head is None:   # Empty list
+            return None
+        else:
+            temp = self.head
+            while temp is not None:
+                if temp.item == data:
+                    if temp.next is not None:   # Node is in between the list or node is not at the end
+                        temp.next.prev = temp.prev
+                        
+                    if temp.prev is not None: # Node is in between the list or node is not at the start
+                        temp.prev.next = temp.next
+                    else:                       # Only one node
+                        self.head = temp.next
+                    break                    
+                temp = temp.next
+                
+    def __iter__(self):
+        return DLLIterator(self.head)
+
+# Doubly Linked List using iterator
+class DLLIterator:
+    def __init__(self, start) -> None:
+        self.current = start
+        
+    def __iter__(self):
+        return self
+    
+    def __next__(self):
+        if not self.current:
+            raise StopIteration
+        data = self.current.item
+        self.current = self.current.next
+        return data
 
 myList = DoublyLinkedList()
 myList.insert_at_start(30)
@@ -86,3 +146,16 @@ myList.print_list()
 print()
 myList.insert_after_node(myList.search_node(30), 40)
 myList.print_list()
+print()
+myList.delete_from_start()
+myList.print_list()
+print()
+myList.delete_from_last()
+myList.print_list()
+print()
+myList.delete_node(20)
+myList.print_list()
+print()
+
+for i in myList:
+    print(f"[{i}]", end=" ==> ")
