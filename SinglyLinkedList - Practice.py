@@ -7,14 +7,42 @@ class Node:
 # Define singly linked list class
 class SinglyLinkedList:
     def __init__(self) -> None:
-        self.head = None
+        self.start = None
         
     def is_empty(self) -> bool:
-        return self.head == None
-    
+        return self.start == None
+            
+    def insert_at_first(self, data) -> None:
+        node = Node(data, self.start)
+        self.start = node
+        
+    def insert_at_last(self, data) -> None:
+        node = Node(data)
+        
+        if not self.is_empty():
+            temp = self.start
+            while temp.next is not None:
+                temp = temp.next
+            temp.next = node
+        else:
+            self.start = node
+        
+    def search_node(self, data) -> Node:
+        temp = self.start
+        
+        while temp.next is not None:
+            if temp.item == data:
+                return temp
+            temp = temp.next
+        
+    def insert_after_node(self, node, data) -> None:
+        if not self.is_empty():
+            new_node = Node(data, node.next)
+            node.next = new_node
+
     def print_list(self) -> None:
         if not self.is_empty():
-            temp = self.head
+            temp = self.start
             while temp is not None:
                 is_last_node = " ==> " if temp.next is not None else ""
                 print(f"[{temp.item}]", end=is_last_node)
@@ -22,59 +50,31 @@ class SinglyLinkedList:
         else:
             print("There are no any node available in the list !")
             
-    def search_node(self, data) -> Node:
-        temp = self.head
-        
-        while temp.next is not None:
-            if temp.item == data:
-                return temp
-            temp = temp.next
-            
-    def insert_at_first(self, data) -> None:
-        node = Node(data, self.head)
-        self.head = node
-        
-    def insert_at_last(self, data) -> None:
-        node = Node(data)
-        
-        if not self.is_empty():
-            temp = self.head
-            while temp.next is not None:
-                temp = temp.next
-            temp.next = node
-        else:
-            self.head = node
-        
-    def insert_after_node(self, node, data) -> None:
-        if not self.is_empty():
-            new_node = Node(data, node.next)
-            node.next = new_node
-            
     def delete_from_first(self) -> None:
         if not self.is_empty():
-            self.head = self.head.next
+            self.start = self.start.next
             
     def delete_from_last(self) -> None:
-        if self.head is None: # Empty list
+        if self.start is None: # Empty list
             return None
-        elif self.head.next is None: # At least one node
-            self.head = None
+        elif self.start.next is None: # At least one node
+            self.start = None
         else:
-            temp = self.head
+            temp = self.start
             while temp.next.next is not None:
                 temp = temp.next
             temp.next = None
             
     def delete_from_node(self, data) -> None:
-        if self.head is None: # Empty list
+        if self.start is None: # Empty list
             return None
-        elif self.head.next is None and self.head.item == data: # At least one node
-            self.head = None
+        elif self.start.next is None and self.start.item == data: # At least one node
+            self.start = None
         else:
-            temp = self.head
+            temp = self.start
             
             if temp.item == data:
-                self.head = None
+                self.start = None
                 
             while temp.next is not None:
                 if temp.next.item == data:
@@ -83,7 +83,7 @@ class SinglyLinkedList:
                 temp = temp.next
                 
     def __iter__(self):
-        return SLLIterator(self.head)
+        return SLLIterator(self.start)
 
 class SLLIterator:
     def __init__(self, start) -> None:

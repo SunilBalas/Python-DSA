@@ -6,40 +6,21 @@ class Node:
         
 class DoublyLinkedList:
     def __init__(self) -> None:
-        self.head = None
+        self.start = None
         
     def is_empty(self) -> bool:
-        return self.head == None
-    
-    def print_list(self) -> None:
-        if not self.is_empty():
-            temp = self.head
-            while temp is not None:
-                is_last_node = " ==> " if temp.next is not None else ""
-                print(f"[{temp.item}]", end=is_last_node)
-                temp = temp.next
-        else:
-            print("There are no any node available in the list !")
-            
-    def search_node(self, data) -> Node:
-        temp = self.head
-        
-        while temp.next is not None:
-            if temp.item == data:
-                return temp
-            temp = temp.next
-        return None
+        return self.start == None
         
     def insert_at_start(self, data) -> None:
         '''
-            - Create a new node with data, previous reference is None and next reference is head pointer
-            - if head pointer is not None then assign the previous reference of head to new node
-            - Assign new node reference to head pointer
+            - Create a new node with data, previous reference is None and next reference is start pointer
+            - if start pointer is not None then assign the previous reference of start to new node
+            - Assign new node reference to start pointer
         '''
-        node = Node(data, None, self.head)
-        if self.head is not None:
-            self.head.prev = node
-        self.head = node
+        node = Node(data, None, self.start)
+        if self.start is not None:
+            self.start.prev = node
+        self.start = node
         
     def insert_at_last(self, data) -> None:
         '''
@@ -47,22 +28,31 @@ class DoublyLinkedList:
                 because next reference is None as it is going to be the last node and previous
                 reference is currently set to None because we don't know the current last node.
                 We need to traverse through the list
-            - Traverse from head to current last node, and after that assign the new node reference 
+            - Traverse from start to current last node, and after that assign the new node reference 
                 to next of the current last node and assign the current last node reference to previous 
                 of the new node
-            - If list is empty then just assign the new node reference to head pointer
+            - If list is empty then just assign the new node reference to start pointer
         '''
         node = Node(data)
         
-        if self.head is not None:
-            temp = self.head
+        if self.start is not None:
+            temp = self.start
             while temp.next is not None:
                 temp = temp.next
             temp.next = node
             node.prev = temp
         else:
-            self.head = node # Empty List
-            
+            self.start = node # Empty List
+        
+    def search_node(self, data) -> Node:
+        temp = self.start
+        
+        while temp.next is not None:
+            if temp.item == data:
+                return temp
+            temp = temp.next
+        return None
+        
     def insert_after_node(self, node, data) -> None:
         '''
             - Create a new node with data, previous reference to given node
@@ -77,34 +67,44 @@ class DoublyLinkedList:
                 node.next.prev = new_node
                 node.next = new_node
                 
+    def print_list(self) -> None:
+        if not self.is_empty():
+            temp = self.start
+            while temp is not None:
+                is_last_node = " ==> " if temp.next is not None else ""
+                print(f"[{temp.item}]", end=is_last_node)
+                temp = temp.next
+        else:
+            print("There are no any node available in the list !")
+                
     def delete_from_start(self) -> None:
         '''
-            - Assign the reference of second node to head pointer
+            - Assign the reference of second node to start pointer
             - If list is not empty then assign the None to previous reference of
                 second node because it is a first node now.
         '''
         
         if not self.is_empty():
-            self.head = self.head.next
-            if self.head is not None:
-                self.head.prev = None
+            self.start = self.start.next
+            if self.start is not None:
+                self.start.prev = None
     
     def delete_from_last(self) -> None:
-        if self.head is None:   # Empty list
+        if self.start is None:   # Empty list
             return None
-        elif self.head.next is None:    # Only one node
-            self.head = None
+        elif self.start.next is None:    # Only one node
+            self.start = None
         else:
-            temp = self.head
+            temp = self.start
             while temp.next is not None:
                 temp = temp.next
             temp.prev.next = None
             
     def delete_node(self, data):
-        if self.head is None:   # Empty list
+        if self.start is None:   # Empty list
             return None
         else:
-            temp = self.head
+            temp = self.start
             while temp is not None:
                 if temp.item == data:
                     if temp.next is not None:   # Node is in between the list or node is not at the end
@@ -113,12 +113,12 @@ class DoublyLinkedList:
                     if temp.prev is not None: # Node is in between the list or node is not at the start
                         temp.prev.next = temp.next
                     else:                       # Only one node
-                        self.head = temp.next
+                        self.start = temp.next
                     break                    
                 temp = temp.next
                 
     def __iter__(self):
-        return DLLIterator(self.head)
+        return DLLIterator(self.start)
 
 # Doubly Linked List using iterator
 class DLLIterator:

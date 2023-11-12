@@ -4,31 +4,31 @@ class Node:
         self.next = next
     
 class SinglyLinkedList:
-    def __init__(self, head=None) -> None:
-        self.head = head
+    def __init__(self, start=None) -> None:
+        self.start = start
         
     def is_empty(self) -> bool:
         '''
-            - If head is points to node means linked list is empty
+            - If start is points to node means linked list is empty
         '''
-        return self.head == None
+        return self.start == None
     
     def insert_at_start(self, data) -> None:
         '''
-            - Create a new node which has item equals data and points to the node which head points to
-            - If head points to None then new node points to None
+            - Create a new node which has item equals data and points to the node which start points to
+            - If start points to None then new node points to None
             
-            - For creating link, give reference of new node to head pointer
+            - For creating link, give reference of new node to start pointer
         '''
-        node = Node(data, self.head)
-        self.head = node
+        node = Node(data, self.start)
+        self.start = node
         
     def insert_at_last(self, data) -> None:
         '''
             - New node points to None because it is at last
             
             - Create a temp variable to track the node
-            - Assign the reference of head to temp
+            - Assign the reference of start to temp
             
             - Traverse the linked list until find the node which points to None and that is the last node
             
@@ -40,14 +40,30 @@ class SinglyLinkedList:
         node = Node(data)
         
         if not self.is_empty():
-            temp = self.head
+            temp = self.start
             
             while temp.next is not None:
                 temp = temp.next
             
             temp.next = node
         else:
-            self.head = node
+            self.start = node
+            
+    def search_node(self, data):
+        '''
+            - Initially, assign the reference of start to temp variable
+            
+            - Traverse in linked list until the temp is not None
+            - If data of temp is search data then return the temp otherwise move forward
+            - If no node matches the search data then return None
+        '''
+        temp = self.start
+        
+        while temp is not None:
+            if temp.item == data:
+                return temp
+            temp = temp.next
+        return None
             
     def insert_after(self, temp, data):
         '''
@@ -59,24 +75,8 @@ class SinglyLinkedList:
             node = Node(data, temp.next)
             temp.next = node
             
-    def search_node(self, data):
-        '''
-            - Initially, assign the reference of head to temp variable
-            
-            - Traverse in linked list until the temp is not None
-            - If data of temp is search data then return the temp otherwise move forward
-            - If no node matches the search data then return None
-        '''
-        temp = self.head
-        
-        while temp is not None:
-            if temp.item == data:
-                return temp
-            temp = temp.next
-        return None
-            
     def print_list(self):
-        temp = self.head
+        temp = self.start
         
         while temp is not None:
             if temp.next is None:
@@ -87,8 +87,8 @@ class SinglyLinkedList:
             
             
     def delete_from_start(self):
-        if self.head is not None:
-            self.head = self.head.next
+        if self.start is not None:
+            self.start = self.start.next
             
     def delete_from_last(self):
         '''
@@ -96,12 +96,12 @@ class SinglyLinkedList:
             
             - Only one node then delete that node
         '''
-        if self.head is None:
+        if self.start is None:
             pass
-        elif self.head.next is None:
-            self.head = None
+        elif self.start.next is None:
+            self.start = None
         else:
-            temp = self.head
+            temp = self.start
             '''
                 - temp.next.next is second last node
             '''
@@ -110,15 +110,15 @@ class SinglyLinkedList:
             temp.next = None
             
     def delete_node(self, data):
-        if self.head is None:
+        if self.start is None:
             pass
-        elif self.head.next is None:
-            if self.head.item == data:
-                self.head = None
+        elif self.start.next is None:
+            if self.start.item == data:
+                self.start = None
         else:
-            temp = self.head
+            temp = self.start
             if temp.item == data:
-                self.head = temp.next
+                self.start = temp.next
             else:
                 while temp.next is not None:
                     if temp.next.item == data:
@@ -127,7 +127,7 @@ class SinglyLinkedList:
                     temp = temp.next
                     
     def __iter__(self):
-        return SLLIterator(self.head)
+        return SLLIterator(self.start)
 
 '''
     Create an iterator for the Singly Linked List
