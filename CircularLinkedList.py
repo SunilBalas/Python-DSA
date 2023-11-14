@@ -117,3 +117,77 @@ class CircularLinkedList:
                     temp = temp.next
                 temp.next = self.last.next
                 self.last = temp
+                
+    def delete_item(self, data) -> None:
+        '''
+            - If list has only one node then check if that node has data which need to delete then assign 
+                the None to last pointer
+            - If list has more nodes and need to delete node which is first node then delete thee first node 
+                otherwise traverse until the temp is not last node then check if need to delete node is last node 
+                then delete the last node and breaks the loop or if target node found then assign the next reference 
+                of temp to next to next reference of temp pointer and breaks the loop
+        '''
+        if not self.is_empty():
+            if self.last.next == self.last:
+                if self.last.item == data:
+                    self.last = None
+            else:
+                if self.last.next.item == data:
+                    self.delete_from_start()
+                else:
+                    temp = self.last.next
+                    while temp is not self.last:
+                        if temp.next == self.last:
+                            if self.last.item == data:
+                                self.delete_from_last()
+                                break
+                        if temp.next.item == data:
+                            temp.next = temp.next.next
+                            break
+                        temp = temp.next
+                        
+                
+    def __iter__(self):
+        return CLLIterator(self.last.next) if self.last is not None else CLLIterator(None)
+class CLLIterator:
+    def __init__(self, start) -> None:
+        self.current = start
+        self.start = start
+        self.flag = False   # check for the flag that list is again points to first node
+        
+    def __iter__(self):
+        return self
+    
+    def __next__(self):
+        if self.current is None:
+            raise StopIteration
+        if self.current is self.start and self.flag:
+            raise StopIteration
+        else:
+            self.flag = True
+        
+        data = self.current.item
+        self.current = self.current.next
+        
+        return data
+    
+cll = CircularLinkedList()
+cll.insert_at_start(20)
+cll.insert_at_start(10)
+cll.insert_at_last(30)
+cll.insert_at_last(50)
+cll.insert_after_node(cll.search_node(30), 40)
+cll.print_list()
+print()
+cll.delete_from_start()
+cll.print_list()
+print()
+cll.delete_from_last()
+cll.print_list()
+print()
+cll.delete_item(40)
+cll.print_list()
+print()
+
+for i in cll:
+    print(f"[{i}]", end=" ==> ")
