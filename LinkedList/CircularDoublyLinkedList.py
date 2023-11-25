@@ -82,28 +82,16 @@ class CircularDoublyLinkedList:
 
     def delete_node(self, data) -> None:
         if self.is_empty():
-            return None
-        elif self.start.next is self.start:
-            if self.start.item == data:
-                self.start = None
-        else:
             temp = self.start
             if temp.item == data:
                 self.delete_from_start()
-            while temp.next is not self.start:
-                if temp is self.start.prev:
-                    if temp.item == data:
-                        self.delete_from_last()
-                        break
-                if temp.item == data:
-                    temp.next.prev = temp.prev
-                    temp.prev.next = temp.next
-                    break
+            else:
                 temp = temp.next
-            if temp is self.start.prev:
-                if temp.item == data:
-                    self.delete_from_last()
-                    
+                while temp is not self.start:
+                    if temp.item == data:
+                        temp.next.prev = temp.prev
+                        temp.prev.next = temp.next
+
     def __iter__(self):
         return CDLLIterator(self.start)
 class CDLLIterator:
