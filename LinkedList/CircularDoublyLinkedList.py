@@ -81,7 +81,7 @@ class CircularDoublyLinkedList:
                 self.start.prev.next = self.start
 
     def delete_node(self, data) -> None:
-        if self.is_empty():
+        if not self.is_empty():
             temp = self.start
             if temp.item == data:
                 self.delete_from_start()
