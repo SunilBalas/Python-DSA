@@ -24,6 +24,8 @@ class Queue(SinglyLinkedList):
     def dequeue(self) -> None:
         if not self.is_empty():
             self.delete_from_start()
+            if self.start is None:
+                self.rear = None
             self.item_count -= 1
         else:
             raise IndexError("Queue is Empty.")
