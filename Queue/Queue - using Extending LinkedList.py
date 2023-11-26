@@ -48,22 +48,22 @@ class Queue(SinglyLinkedList):
     def insert_at_start(self, data) -> None:
         raise AttributeError("No attribute 'insert_at_start' in queue.")
     
-    def insert_after(self, temp, data):
+    def insert_after(self, temp, data) -> None:
         raise AttributeError("No attribute 'insert_after' in queue.")
     
-    def delete_from_last(self):
+    def delete_from_last(self) -> None:
         raise AttributeError("No attribute 'delete_from_last' in queue.")
     
-    def delete_node(self, data):
+    def delete_node(self, data) -> None:
         raise AttributeError("No attribute 'delete_node' in queue.")
     
-    def print_list(self):
+    def print_list(self) -> None:
         raise AttributeError("No attribute 'print_list' in queue.")
     
-    def search_node(self):
+    def search_node(self, data) -> None:
         raise AttributeError("No attribute 'search_node' in queue.")
     
-    def __iter__(self):
+    def __iter__(self) -> None:
         raise AttributeError("No attribute '__iter__' in queue.")
 
 q = Queue()

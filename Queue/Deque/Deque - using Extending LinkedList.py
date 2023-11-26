@@ -67,6 +67,21 @@ class Deque(DoublyLinkedList):
     
     def size(self) -> int:
         return self.item_count
+    
+    def insert_after(self, temp, data) -> None:
+        raise AttributeError("No attribute 'insert_after' in queue.")
+    
+    def delete_node(self, data) -> None:
+        raise AttributeError("No attribute 'delete_node' in queue.")
+    
+    def print_list(self) -> None:
+        raise AttributeError("No attribute 'print_list' in queue.")
+    
+    def search_node(self, data) -> None:
+        raise AttributeError("No attribute 'search_node' in queue.")
+    
+    def __iter__(self) -> None:
+        raise AttributeError("No attribute '__iter__' in queue.")
 
 dq = Deque()
 
@@ -94,3 +109,14 @@ except IndexError as ex:
 print(f"Front Element: {dq.get_front()}")
 print(f"Rear Element: {dq.get_rear()}")
 print(f"Deque Size: {dq.size()}")
+
+try:
+    search_node = None
+    try:
+        search_node = dq.search_node(20)
+    except AttributeError as ex:
+        print(ex.args[0])
+        
+    dq.insert_after(search_node, -10)
+except AttributeError as ex:
+    print(ex.args[0])
