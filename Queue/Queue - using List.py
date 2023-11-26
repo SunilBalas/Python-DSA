@@ -12,7 +12,7 @@ class Queue:
     
     def dequeue(self) -> None:
         if not self.is_empty():
-            self.items.remove(self.items[-1])
+            self.items.pop(0)
         else:
             raise IndexError("Queue is Empty.")
     
