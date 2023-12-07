@@ -12,3 +12,7 @@
     - Priority Queue
 
 ## Recursion
+
+## Non Linear Data Structures
+  - Tree
+    - Binary Search Tree (BST)
