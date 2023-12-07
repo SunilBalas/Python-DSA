@@ -10,3 +10,7 @@
   - Queue
     - Deque (Double Ended Queue)
     - Priority Queue
+
+## Non Linear Data Structures
+  - Tree
+    - Binary Search Tree (BST)
