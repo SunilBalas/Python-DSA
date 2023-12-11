@@ -1,4 +1,4 @@
-from typing import List
+from typing import Any, List
 
 class Node:
     def __init__(self, item=None, left=None, right=None) -> None:
@@ -68,6 +68,52 @@ class BinarySearchTree:
             self.recursive_postorder_traversal(root.left, result)
             self.recursive_postorder_traversal(root.right, result)
             result.append(root.item)
+    
+    def find_min_value_node(self) -> Any:
+        if self.root is not None:
+            return self.recursive_find_min_value_node(self.root)
+    
+    def recursive_find_min_value_node(self, root) -> Any:
+        if root.left is None:
+            return root.item
+        return self.recursive_find_min_value_node(root.left)
+    
+    def find_max_value_node(self) -> Any:
+        if self.root is not None:
+            return self.recursive_find_max_value_node(self.root)
+    
+    def recursive_find_max_value_node(self, root) -> Any:
+        if root.right is None:
+            return root.item
+        return self.recursive_find_max_value_node(root.right)
+    
+    def get_tree_size(self) -> int:
+        result = self.inorder_traversal()
+        return len(result)
+    
+    def delete_node(self, target) -> None:
+        if self.root is not None:
+            if self.root.left is None and self.root.right is None:  # Only one node present in the tree
+                self.root = None
+            else:
+                parent = self.root
+                self.recursive_delete_node(self.root, parent, target)
+    
+    def recursive_delete_node(self, root, parent, target):
+        if target < root.item:
+            parent = root
+            self.recursive_delete_node(root.left, parent, target)
+        elif target > root.item:
+            parent = root
+            self.recursive_delete_node(root.right, parent, target)
+        else:
+            '''
+                TODO: Need to check if targeted node has how many children ?
+                    1. Targeted node has no child
+                    2. Targeted node has one child
+                    3. Targeted node has two children
+            '''
+            pass
 
 
 tree = BinarySearchTree()
@@ -86,3 +132,8 @@ print(f"{tree.preorder_traversal()}")
 print()
 print(f"{tree.postorder_traversal()}")
 print()
+print(f"Min value item node: {tree.find_min_value_node()}")
+print()
+print(f"Max value item node: {tree.find_max_value_node()}")
+print()
+print(f"Tree Size: {tree.get_tree_size()}")
