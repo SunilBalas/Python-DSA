@@ -20,6 +20,7 @@ class Graph:
             return self.adj_matrix[u][v] != 0
         else:
             print("Invalid Vertex")
+            return False
     
     def print_adj_matrix(self) -> None:
         for row_list in self.adj_matrix:
