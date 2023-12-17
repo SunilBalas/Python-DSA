@@ -37,3 +37,6 @@
 
     **1. Binary Search Tree (BST)**
       - A Binary Search Tree (BST) is a binary tree where the left child of a node contains elements smaller than the node, and the right child contains elements larger than the node. This ordering property makes searching efficient.
+
+- ### Graph
+  - Graphs in data structures are used to represent the relationships between objects. Every graph consists of a set of points known as vertices or nodes connected by lines known as edges. The vertices in a network represent entities.
