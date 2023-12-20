@@ -40,5 +40,7 @@
 
 - ### Graph
   - Graphs in data structures are used to represent the relationships between objects. Every graph consists of a set of points known as vertices or nodes connected by lines known as edges. The vertices in a network represent entities.
+
     **1. Breadth First Search (BFS)**
+
     **2. Depth First Search (DFS)**
