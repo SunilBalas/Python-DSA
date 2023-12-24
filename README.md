@@ -46,3 +46,8 @@
 
     **2. Depth First Search (DFS)**
       - DFS is an algorithm for traversing or searching tree or graph data structures. It starts at the tree root (or some arbitrary node of the graph) and explores as far as possible along each branch before backtracking.
+
+## Sorting
+- ### Bubble Sort
+- ### Modified Bubble Sort
+- ### Selection Sort
