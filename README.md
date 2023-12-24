@@ -42,5 +42,7 @@
   - Graphs in data structures are used to represent the relationships between objects. Every graph consists of a set of points known as vertices or nodes connected by lines known as edges. The vertices in a network represent entities.
 
     **1. Breadth First Search (BFS)**
+      - BFS is an algorithm for traversing or searching tree or graph data structures. It starts at the tree root (or some arbitrary node of the graph) and explores the neighbor nodes at the present depth prior to moving on to nodes at the next depth level.
 
     **2. Depth First Search (DFS)**
+      - DFS is an algorithm for traversing or searching tree or graph data structures. It starts at the tree root (or some arbitrary node of the graph) and explores as far as possible along each branch before backtracking.
