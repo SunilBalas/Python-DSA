@@ -51,3 +51,4 @@
 - ### Bubble Sort
 - ### Modified Bubble Sort
 - ### Selection Sort
+- ### Insertion Sort
