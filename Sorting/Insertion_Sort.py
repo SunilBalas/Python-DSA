@@ -2,7 +2,7 @@ from typing import List
 
 def insertion_sort(elements:list) -> None:
     n = len(elements)
-    for i in range(n):
+    for i in range(1, n):
         temp = elements[i]
         
         j = i-1
