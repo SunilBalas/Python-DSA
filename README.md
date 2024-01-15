@@ -54,3 +54,4 @@
 - ### Insertion Sort
 - ### Quick Sort
 - ### Optimized Quick Sort
+- ### Merge Sort
